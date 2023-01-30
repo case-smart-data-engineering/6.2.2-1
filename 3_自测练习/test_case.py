@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 
-from my_solution import solution
+import os
+from my_solution import get_probability
 
 
 # 测试用例
-def test_solution():
-    assert solution(8) == 9  # 判断输出结果，预期increment(8)应该为9
+
+os.system('my_solution.py')
+with open("cookbook_test.txt", "r", encoding="utf-8") as f:
+    articles = f.readlines()
+
+# 加入了参数为0.2的拉普拉斯平滑处理后，’青椒炒肉片‘出现的概率应为0.101
+assert round(get_probability('青椒炒肉片'), 3) == 0.101
