@@ -68,5 +68,3 @@ def get_probability(sentence):
         sentence_prob *= (probability_2 / probability_1)
     sentence_prob *= probability_1
     return sentence_prob
-
-print(get_probability('青椒炒肉片'))
