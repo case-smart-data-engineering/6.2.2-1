@@ -47,6 +47,7 @@ words_count_2 = Counter(TOKEN_2_GRAM)
 v = len(words_count.keys())
 
 
+# 为防止经常出现零概率问题，这里计算概率时采用了拉普拉斯平滑处理
 # 计算单个词出现的概率
 def prob_1(word, sig=0.2):
     return (words_count[word] + sig) / (len(TOKEN)+sig*v)
