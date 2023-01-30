@@ -9,7 +9,7 @@ def cut(string): return list(jieba.cut(string))
 # cut('青椒炒肉片')  # ['青椒', '炒', '肉片']
 
 # 自己构建语料库
-with open("cookbook_test.txt", "r", encoding="utf-8") as f:
+with open("1_算法示例/cookbook.txt", "r", encoding="utf-8") as f:
     articles = f.readlines()
 # 切词，清洗，对读取的语料去标点、空格
 def token(string):
@@ -68,5 +68,5 @@ def get_probability(sentence):
     sentence_prob *= probability_1
     return sentence_prob
 
-# 计算’长沙臭豆腐‘出现的概率
-print(get_probability('青椒炒肉片'))
+# 计算’长沙臭豆腐‘出现的概率，保留三位小数
+print(round(get_probability('长沙臭豆腐'), 3))
