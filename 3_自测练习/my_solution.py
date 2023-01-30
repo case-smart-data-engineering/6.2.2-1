@@ -44,8 +44,8 @@ words_count_2 = Counter(TOKEN_2_GRAM)
 # Counter({'青椒炒': 3, '炒肉片': 2, '茄子炒': 2, '肉片青椒': 1, '炒牛肉': 1, '牛肉青椒': 1, '肉片茄子': 1, '炒肉末': 1, '肉末茄子': 1})
 
 # 构建2—gram模型
-v = len(words_count.keys())
-
+v = len(words_count.keys())  # 单个分词总的类别数
+m = len(words_count_2.keys())  # 两个连着的分词总的类别数
 # 为防止经常出现零概率问题，这里计算概率时采用了拉普拉斯平滑处理，平滑参数为0.2
 # 计算单个词出现的概率
 def prob_1(word, sig=0.2):
@@ -54,7 +54,7 @@ def prob_1(word, sig=0.2):
 
 # 计算两个组合的词出现的概率
 def prob_2(word1, word2, sig=0.2):
-    return (words_count_2[word1+word2] + sig) / (len(TOKEN_2_GRAM) + sig*v)
+    return (words_count_2[word1+word2] + sig) / (len(TOKEN_2_GRAM) + sig*m)
 
 
 # 计算某个句子的概率（公式在算法演示的gif图中的2—gram模型中）
@@ -68,3 +68,5 @@ def get_probability(sentence):
         sentence_prob *= (probability_2 / probability_1)
     sentence_prob *= probability_1
     return sentence_prob
+
+print(get_probability('青椒炒肉片'))
