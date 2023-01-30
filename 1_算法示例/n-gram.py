@@ -9,10 +9,8 @@ def cut(string): return list(jieba.cut(string))
 # cut('青椒炒肉片')  # ['青椒', '炒', '肉片']
 
 # 自己构建语料库
-with open("1_算法示例/cookbook.txt", "r", encoding="utf-8") as f:
+with open("cookbook_test.txt", "r", encoding="utf-8") as f:
     articles = f.readlines()
-
-
 # 切词，清洗，对读取的语料去标点、空格
 def token(string):
     return re.findall('\w+', string)
@@ -44,8 +42,8 @@ words_count_2 = Counter(TOKEN_2_GRAM)
 # Counter({'剁椒': 4, '咕噜肉': 2, '手撕': 2, '蒜蓉蒸': 2, '蒸茄子': 2, '茄子土豆': 2, '土豆烧茄子': 2,...})
 
 # 构建2—gram模型
-v = len(words_count.keys())
-
+v = len(words_count.keys())  # 单个分词总的类别数
+m = len(words_count_2.keys())  # 两个连着的分词总的类别数
 
 # 为防止经常出现零概率问题，这里计算概率时采用了拉普拉斯平滑处理
 # 计算单个词出现的概率
@@ -55,7 +53,7 @@ def prob_1(word, sig=0.2):
 
 # 计算两个组合的词出现的概率
 def prob_2(word1, word2, sig=0.2):
-    return (words_count_2[word1+word2] + sig) / (len(TOKEN_2_GRAM) + sig*v)
+    return (words_count_2[word1+word2] + sig) / (len(TOKEN_2_GRAM) + sig*m)
 
 
 # 计算某个句子的概率（公式在算法演示的gif图中的2—gram模型中）
@@ -66,9 +64,9 @@ def get_probability(sentence):
         next_word = words[i+1]
         probability_1 = prob_1(next_word)
         probability_2 = prob_2(word, next_word)
-        sentence_prob *= (probability_2 // probability_1)
+        sentence_prob *= (probability_2 / probability_1)
     sentence_prob *= probability_1
     return sentence_prob
 
 # 计算’长沙臭豆腐‘出现的概率
-print(get_probability('长沙臭豆腐'))
+print(get_probability('青椒炒肉片'))
