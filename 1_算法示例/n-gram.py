@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+
 import jieba
 import re
 
@@ -69,4 +72,5 @@ def get_probability(sentence):
     return sentence_prob
 
 # 计算’长沙臭豆腐‘出现的概率，保留三位小数
-print(round(get_probability('长沙臭豆腐'), 3))
+if __name__ == '__main__':
+    print(round(get_probability('长沙臭豆腐'), 3))
