@@ -6,25 +6,7 @@ import re
 
 
 def cut(string): return list(jieba.cut(string))
-
-
-# jieba.cut返回迭代器，这里可用jieba.lcut(string)代替list(jieba.cut(string))
-# cut('青椒炒肉片')  # ['青椒', '炒', '肉片']
-
-# 自己构建语料库
-with open("3_自测练习/cookbook_test.txt", "r", encoding="utf-8") as f:
-    articles = f.readlines()
-# 切词，清洗，对读取的语料去标点、空格
-def token(string):
-    return re.findall('\w+', string)
-
-
-articles_clean = [''.join(token(str(a))) for a in articles]
-# 对文本切词处理，存入TOKEN
-TOKEN = []
-for i, article in enumerate(articles_clean):
-    if i % 10000 == 0: print(i)
-    TOKEN += cut(article)
+TOKEN = cut('青椒炒肉片、青椒炒牛肉、青椒炒肉片、茄子炒肉末、茄子炒豆角')
 # print(TOKEN)
 # ['青椒', '炒', '肉片', '青椒', '炒', '牛肉', '青椒', '炒', '肉片', '茄子', '炒', '肉末', '茄子', '炒', '豆角']
 
@@ -57,7 +39,7 @@ def prob_2(word1, word2, sig=0.2):
     return (words_count_2[word1+word2] + sig) / (len(TOKEN_2_GRAM) + sig*m)
 
 
-# 计算某个句子的概率（公式在算法演示的gif图中的2—gram模型中）
+# 计算某个句子的概率（公式在算法演示的demo.gif中）
 def get_probability(sentence):
     words = cut(sentence)
     sentence_prob = 1
