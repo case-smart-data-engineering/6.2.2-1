@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
-import os
 from my_solution import get_probability
 
 
 # 测试用例
-
-os.system('3_自测练习/my_solution.py')
-with open("3_自测练习/cookbook_test.txt", "r", encoding="utf-8") as f:
-    articles = f.readlines()
-
-# 加入了参数为0.2的拉普拉斯平滑处理后，’青椒炒肉片‘出现的概率保留三位小数应为0.101
-assert round(get_probability('青椒炒肉片'), 3) == 0.101
+def test_solution():
+    sentence = '青椒炒肉片、青椒炒牛肉、青椒炒肉片、茄子炒肉末、茄子炒豆角'
+    # 正确答案
+    # 加入了参数为0.2的拉普拉斯平滑处理后，’青椒炒肉片‘出现的概率保留三位小数应为0.101
+    correct_solution = 0.101
+    
+    # 程序求解结果
+    result = round(get_probability(sentence, 3))
+    assert correct_solution == result
