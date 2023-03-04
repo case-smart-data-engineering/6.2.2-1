@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 # 待测试程序
 import jieba
 import re
@@ -15,7 +16,6 @@ from collections import Counter
 words_count = Counter(TOKEN)
 # print(words_count)
 # Counter({'炒': 5, '青椒': 3, '肉片': 2, '茄子': 2, '牛肉': 1, '肉末': 1, '豆角': 1})
-
 
 # 对token里面相邻的两个词进行组合，经行频数统计，结果存入words_count_2
 TOKEN_2_GRAM = [''.join(TOKEN[i:i+2]) for i in range(len(TOKEN[:-2]))]
@@ -50,3 +50,7 @@ def get_probability(sentence):
         sentence_prob *= (probability_2 / probability_1)
     sentence_prob *= probability_1
     return sentence_prob
+
+
+if __name__ == '__main__':
+    pass
