@@ -13,7 +13,7 @@ def cut(string): return list(jieba.cut(string))
 # cut('青椒炒肉片')  # ['青椒', '炒', '肉片']
 
 # 自己构建语料库
-with open("cookbook.txt", "r", encoding="utf-8") as f:
+with open("/workspace/6.2.1-1/1_算法示例/cookbook.txt", "r", encoding="utf-8") as f:
     articles = f.readlines()
 # 切词，清洗，对读取的语料去标点、空格
 def token(string):
